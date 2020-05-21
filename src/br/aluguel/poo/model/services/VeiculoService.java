@@ -31,6 +31,4 @@ public class VeiculoService {
       public void alterar(Veiculo v ) throws SQLException{
           dao.alterar(v);
       }
-
-
 }

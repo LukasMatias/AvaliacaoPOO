@@ -3,6 +3,7 @@ package br.aluguel.poo.controller;
 import br.aluguel.poo.model.dao.ConexaoBD;
 import br.aluguel.poo.model.dao.VeiculoDao;
 import br.aluguel.poo.model.entidades.Veiculo;
+import br.aluguel.poo.model.services.ValidacoesService;
 import br.aluguel.poo.model.services.VeiculoService;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -63,11 +64,11 @@ public class CadVeiculoForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
-        jButtonEditarSair = new javax.swing.JButton();
-        jButtonEditarVoltar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,14 +100,34 @@ public class CadVeiculoForm extends javax.swing.JFrame {
         jLabelDisponibilidade.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabelDisponibilidade.setText("Disponibilidade:");
 
+        jTextFieldCodigo.setEnabled(false);
+        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodigoActionPerformed(evt);
+            }
+        });
+
+        jTextFieldMarca.setEnabled(false);
+
+        jFormattedTextFieldPlaca.setEnabled(false);
+
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<SELECIONE>", "ECONÔMICO", "SEDAN", "SUV", "PRÊMIUM" }));
+        jComboBoxTipo.setEnabled(false);
+
+        jTextFieldKM.setEnabled(false);
 
         jComboBoxDisponibilidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<SELECIONE>", "DISPONÍVEL", "INDISPONÍVEL" }));
+        jComboBoxDisponibilidade.setEnabled(false);
 
         jComboBoxTanque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<SELECIONE>", "VAZIO ", "CHEIO ", "METADE (1/2)", "UM QUARTO (1/4)", "TRES QUARTO (3/4)" }));
+        jComboBoxTanque.setEnabled(false);
+
+        jTextFieldAno.setEnabled(false);
 
         jLabelTipoVeicModelo.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabelTipoVeicModelo.setText("Modelo:");
+
+        jTextFieldModelo.setEnabled(false);
 
         javax.swing.GroupLayout jPanelCadstroLayout = new javax.swing.GroupLayout(jPanelCadstro);
         jPanelCadstro.setLayout(jPanelCadstroLayout);
@@ -190,6 +211,11 @@ public class CadVeiculoForm extends javax.swing.JFrame {
         jLabelPesquisar.setText("Pesquisar por:");
 
         jComboBoxPesquisar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<SELECIONE>", "MARCA E MODELO", "PREÇO", "CATEGORIA", " " }));
+        jComboBoxPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPesquisarActionPerformed(evt);
+            }
+        });
 
         jButtonPesquisar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButtonPesquisar.setText("Pesquisar");
@@ -205,14 +231,14 @@ public class CadVeiculoForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "MARCA", "MODELO", "TIPO"
+                "ID", "MARCA", "MODELO", "ANO", "DISPONIBILIDADE"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -266,6 +292,7 @@ public class CadVeiculoForm extends javax.swing.JFrame {
 
         jButtonSalvar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.setEnabled(false);
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvarActionPerformed(evt);
@@ -274,22 +301,24 @@ public class CadVeiculoForm extends javax.swing.JFrame {
 
         jButtonCancelar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setEnabled(false);
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButton1.setText("Novo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNovo.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButtonNovo.setText("Novo");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNovoActionPerformed(evt);
             }
         });
 
         jButtonExcluir.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setEnabled(false);
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
@@ -298,25 +327,26 @@ public class CadVeiculoForm extends javax.swing.JFrame {
 
         jButtonEditar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButtonEditar.setText("Editar");
+        jButtonEditar.setEnabled(false);
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditarActionPerformed(evt);
             }
         });
 
-        jButtonEditarSair.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButtonEditarSair.setText("Sair");
-        jButtonEditarSair.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSair.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarSairActionPerformed(evt);
+                jButtonSairActionPerformed(evt);
             }
         });
 
-        jButtonEditarVoltar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButtonEditarVoltar.setText("Voltar");
-        jButtonEditarVoltar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVoltar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarVoltarActionPerformed(evt);
+                jButtonVoltarActionPerformed(evt);
             }
         });
 
@@ -329,17 +359,17 @@ public class CadVeiculoForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditarVoltar)
+                .addComponent(jButtonVoltar)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonEditarSair))
+                .addComponent(jButtonSair))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,12 +377,12 @@ public class CadVeiculoForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonNovo)
                     .addComponent(jButtonExcluir)
                     .addComponent(jButtonEditar)
-                    .addComponent(jButtonEditarVoltar))
+                    .addComponent(jButtonVoltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButtonEditarSair))
+                .addComponent(jButtonSair))
         );
 
         javax.swing.GroupLayout jPanelLayoutCadastroLayout = new javax.swing.GroupLayout(jPanelLayoutCadastro);
@@ -396,10 +426,60 @@ public class CadVeiculoForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void validacao() {
+
+        if (jComboBoxTipo.getSelectedItem().equals("<SELECIONE>")) {
+            JOptionPane.showMessageDialog(null, "Por favor, Selecione um tipo de veículo válido!");
+            return;
+        }
+        if (jComboBoxTanque.getSelectedItem().equals("<SELECIONE>")) {
+            JOptionPane.showMessageDialog(null, "Por favor, Selecione o status do tanque do veículo!");
+            return;
+        }
+        if (jComboBoxDisponibilidade.getSelectedItem().equals("<SELECIONE>")) {
+            JOptionPane.showMessageDialog(null, "Por favor, Selecione a Disponibilidade do veículo!");
+            return;
+        }
+        if (jTextFieldMarca.getText().trim().equals("") || jTextFieldMarca.getText().matches(".*[0-9].*")) {
+            JOptionPane.showMessageDialog(null, "Por favor, informe uma marca válida para o veículo!");
+            return;
+        }
+        if (jTextFieldAno.getText().trim().equals("") || jTextFieldAno.getText().matches(".*[a-z].*")
+                || jTextFieldAno.getText().matches(".*[,].*") || jTextFieldAno.getText().trim().length() != 4) {
+            JOptionPane.showMessageDialog(null, "Por favor, informe o ano válido do veículo!");
+            return;
+        }
+        if (jFormattedTextFieldPlaca.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor, informe a placa do veículo!");
+            return;
+        }
+        if (jTextFieldKM.getText().trim().equals("") || jTextFieldKM.getText().matches(".*[a-z].*") || jTextFieldKM.getText().matches(".*[,].*")) {
+            JOptionPane.showMessageDialog(null, "Por favor, informe a Kilometragem Correta do veículo!");
+            return;
+        }
+        if (jTextFieldModelo.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor, informe o modelo do veículo!");
+            return;
+        }
+
+    }
+
+    public void limparCampos() {
+        jTextFieldCodigo.setText("");
+        jTextFieldMarca.setText("");
+        jTextFieldAno.setText("");
+        jFormattedTextFieldPlaca.setText("");
+        jTextFieldKM.setText("");
+        jTextFieldModelo.setText("");
+        jComboBoxTipo.setSelectedIndex(0);
+        jComboBoxTanque.setSelectedIndex(0);
+        jComboBoxDisponibilidade.setSelectedIndex(0);
+    }
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
 
-        v.setIdVeiculo(Integer.parseInt(jTextFieldCodigo.getText()));
+        validacao();
+        v.setIdVeiculo(jTextFieldCodigo.getText());
         v.setMarca(jTextFieldMarca.getText());
         v.setAno(jTextFieldAno.getText());
         v.setPlaca(jFormattedTextFieldPlaca.getText());
@@ -408,38 +488,41 @@ public class CadVeiculoForm extends javax.swing.JFrame {
         v.setModelo(jTextFieldModelo.getText());
         v.setTanque((String) jComboBoxTanque.getSelectedItem());
         v.setDisponibilidade((String) jComboBoxDisponibilidade.getSelectedItem());
+
         try {
-            service.incluir(v);
+            if (v.getIdVeiculo().equals("")) {
+                service.incluir(v);
+            }
             listarVeiculos();
         } catch (SQLException ex) {
             Logger.getLogger(CadVeiculoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        jTextFieldCodigo.setText("");
-        jTextFieldMarca.setText("");
-        jTextFieldAno.setText("");
-        jFormattedTextFieldPlaca.setText("");
-        jTextFieldKM.setText("");
-        jTextFieldModelo.setText("");
-
+        limparCampos();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         int rsp = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir o produto?", "Excluir Produto",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (rsp == JOptionPane.YES_OPTION) {
-            v.setIdVeiculo(Integer.parseInt(jTextFieldCodigo.getText()));
+            v.setIdVeiculo(jTextFieldCodigo.getText());
             try {
                 service.excluir(v);
                 listarVeiculos();
-                jTextFieldCodigo.setText("");
-                jTextFieldMarca.setText("");
-                jTextFieldAno.setText("");
-                jFormattedTextFieldPlaca.setText("");
-                jTextFieldKM.setText("");
-                jTextFieldModelo.setText("");
+                limparCampos();
+                jTextFieldMarca.setEnabled(false);
+                jTextFieldAno.setEnabled(false);
+                jFormattedTextFieldPlaca.setEnabled(false);
+                jTextFieldMarca.setEnabled(false);
+                jTextFieldKM.setEnabled(false);
+                jTextFieldAno.setEnabled(false);
+                jTextFieldModelo.setEnabled(false);
+                jFormattedTextFieldPlaca.setEnabled(false);
+                jComboBoxTipo.setEnabled(false);
+                jComboBoxTanque.setEnabled(false);
+                jComboBoxDisponibilidade.setEnabled(false);
                 jButtonEditar.setEnabled(false);
                 jButtonExcluir.setEnabled(false);
+                jButtonNovo.setEnabled(true);
 
             } catch (SQLException ex) {
                 Logger.getLogger(CadVeiculoForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -456,11 +539,21 @@ public class CadVeiculoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-
-        String marca = "" + jTable1.getValueAt(jTable1.getSelectedRow(), 1);
+        jTextFieldMarca.setEnabled(true);
+        jTextFieldAno.setEnabled(true);
+        jFormattedTextFieldPlaca.setEnabled(true);
+        jTextFieldMarca.setEnabled(true);
+        jTextFieldKM.setEnabled(true);
+        jTextFieldAno.setEnabled(true);
+        jTextFieldModelo.setEnabled(true);
+        jFormattedTextFieldPlaca.setEnabled(true);
+        jComboBoxTipo.setEnabled(true);
+        jComboBoxTanque.setEnabled(true);
+        jComboBoxDisponibilidade.setEnabled(true);
+        String id = "" + jTable1.getValueAt(jTable1.getSelectedRow(), 0);
         try {
             conecta.conectar();
-            conecta.executaSQL("select * from veiculo where MARCA ='" + marca + "'");
+            conecta.executaSQL("select * from veiculo where ID ='" + id + "'");
             conecta.rs.first();
             jTextFieldCodigo.setText(String.valueOf(conecta.rs.getInt("ID")));
             jTextFieldMarca.setText(conecta.rs.getString("MARCA"));
@@ -484,22 +577,87 @@ public class CadVeiculoForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextFieldCodigo.setText("");
-        jTextFieldMarca.setText("");
-        jTextFieldAno.setText("");
-        jFormattedTextFieldPlaca.setText("");
-        jTextFieldKM.setText("");
-        jTextFieldModelo.setText("");
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        jTextFieldMarca.setEnabled(true);
+        jTextFieldAno.setEnabled(true);
+        jFormattedTextFieldPlaca.setEnabled(true);
+        jTextFieldMarca.setEnabled(true);
+        jTextFieldKM.setEnabled(true);
+        jTextFieldAno.setEnabled(true);
+        jTextFieldModelo.setEnabled(true);
+        jFormattedTextFieldPlaca.setEnabled(true);
+        jComboBoxTipo.setEnabled(true);
+        jComboBoxTanque.setEnabled(true);
+        jComboBoxDisponibilidade.setEnabled(true);
+        limparCampos();
         jButtonCancelar.setEnabled(true);
         jButtonExcluir.setEnabled(false);
         jButtonEditar.setEnabled(false);
         jButtonSalvar.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        jButtonPesquisar.setEnabled(true);
+        jButtonSair.setEnabled(true);
+        jButtonNovo.setEnabled(false);
+        jButtonVoltar.setEnabled(true);
+    }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
 
+        limparCampos();
+        jButtonCancelar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        jButtonPesquisar.setEnabled(true);
+        jButtonSair.setEnabled(true);
+        jButtonNovo.setEnabled(true);
+        jButtonVoltar.setEnabled(true);
+
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        validacao();
+        v.setIdVeiculo(jTextFieldCodigo.getText().trim());
+        v.setMarca(jTextFieldMarca.getText());
+        v.setAno(jTextFieldAno.getText());
+        v.setPlaca(jFormattedTextFieldPlaca.getText());
+        v.setTipo((String) jComboBoxTipo.getSelectedItem());
+        v.setKilometragem(Float.parseFloat(jTextFieldKM.getText()));
+        v.setModelo(jTextFieldModelo.getText());
+        v.setTanque((String) jComboBoxTanque.getSelectedItem());
+        v.setDisponibilidade((String) jComboBoxDisponibilidade.getSelectedItem());
+        jButtonCancelar.setEnabled(false);
+        jButtonExcluir.setEnabled(true);
+        jButtonEditar.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        jButtonPesquisar.setEnabled(true);
+        jButtonSair.setEnabled(true);
+        jButtonNovo.setEnabled(true);
+        jButtonVoltar.setEnabled(true);
+        try {
+            service.alterar(v);
+            listarVeiculos();
+            limparCampos();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadVeiculoForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        dispose();
+        JOptionPane.showMessageDialog(null, "Finalizando...");
+        JOptionPane.showMessageDialog(null, "Programa Finalizado!");
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        FormInicio abrirInicio = new FormInicio();
+        abrirInicio.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jComboBoxPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPesquisarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
 
@@ -513,40 +671,12 @@ public class CadVeiculoForm extends javax.swing.JFrame {
                 Logger.getLogger(CadVeiculoForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
-
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        v.setIdVeiculo(Integer.parseInt(jTextFieldCodigo.getText()));
-        v.setMarca(jTextFieldMarca.getText());
-        v.setAno(jTextFieldAno.getText());
-        v.setPlaca(jFormattedTextFieldPlaca.getText());
-        v.setTipo((String) jComboBoxTipo.getSelectedItem());
-        v.setKilometragem(Float.parseFloat(jTextFieldKM.getText()));
-        v.setModelo(jTextFieldModelo.getText());
-        v.setTanque((String) jComboBoxTanque.getSelectedItem());
-        v.setDisponibilidade((String) jComboBoxDisponibilidade.getSelectedItem());
-        try {
-            service.alterar(v);
-            listarVeiculos();
-        } catch (SQLException ex) {
-            Logger.getLogger(CadVeiculoForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
-    }//GEN-LAST:event_jButtonEditarActionPerformed
-
-    private void jButtonEditarSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarSairActionPerformed
-        dispose();
-        JOptionPane.showMessageDialog(null, "Finalizando...");
-        JOptionPane.showMessageDialog(null, "Programa Finalizado!");
-    }//GEN-LAST:event_jButtonEditarSairActionPerformed
-
-    private void jButtonEditarVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarVoltarActionPerformed
-        FormInicio abrirInicio = new FormInicio();
-        abrirInicio.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButtonEditarVoltarActionPerformed
     public void listarVeiculos() throws SQLException {
 
         List<Veiculo> resultados = service.listar();
@@ -556,12 +686,13 @@ public class CadVeiculoForm extends javax.swing.JFrame {
             linha.add(v.getIdVeiculo());
             linha.add(v.getMarca());
             linha.add(v.getModelo());
-            linha.add(v.getTipo());
+            linha.add(v.getAno());
+            linha.add(v.getDisponibilidade());
 
             resultadoVector.add(linha);
         }
 
-        Vector<String> colunasVector = new Vector(Arrays.asList("ID", "MARCA", "MODELO", "TIPO"));
+        Vector<String> colunasVector = new Vector(Arrays.asList("ID", "MARCA", "MODELO", "ANO", "DISPONIBILIDADE"));
 
         // Adicionar resultados no jTable1
         jTable1.removeAll();
@@ -595,14 +726,14 @@ public class CadVeiculoForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonEditarSair;
-    private javax.swing.JButton jButtonEditarVoltar;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxDisponibilidade;
     private javax.swing.JComboBox<String> jComboBoxPesquisar;
     private javax.swing.JComboBox<String> jComboBoxTanque;

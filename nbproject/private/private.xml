@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/NetBeansProjects/GerenciadorDeCarrosDeAluguel/src/br/aluguel/poo/model/dao/VeiculoDao.java</file>
+            <file>file:/C:/NetBeansProjects/GerenciadorDeCarrosDeAluguel/src/br/aluguel/poo/model/services/OperacaoService.java</file>
+            <file>file:/C:/NetBeansProjects/GerenciadorDeCarrosDeAluguel/src/br/aluguel/poo/model/services/VeiculoService.java</file>
+            <file>file:/C:/NetBeansProjects/GerenciadorDeCarrosDeAluguel/src/br/aluguel/poo/controller/CadVeiculoForm.java</file>
+            <file>file:/C:/NetBeansProjects/GerenciadorDeCarrosDeAluguel/src/br/aluguel/poo/controller/FormInicio.java</file>
+            <file>file:/C:/NetBeansProjects/GerenciadorDeCarrosDeAluguel/src/br/aluguel/poo/model/services/ValidacoesService.java</file>
+        </group>
     </open-files>
 </project-private>

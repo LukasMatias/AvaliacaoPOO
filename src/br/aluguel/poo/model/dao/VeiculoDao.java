@@ -19,16 +19,16 @@ public class VeiculoDao {
     public void addVeiculo(Veiculo v) throws SQLException {
         conecta.conectar();
         try {
-            PreparedStatement stmt = conecta.conn.prepareStatement("INSERT INTO veiculo (ID,MARCA, ANO, PLACA, TIPO, KILOMETRAGEM, MODELO, TANQUE, DISPONIBILIDADE) VALUES (?,?,?,?,?,?,?,?,?)");
-            stmt.setInt(1, v.getIdVeiculo());
-            stmt.setString(2, v.getMarca());
-            stmt.setString(3, v.getAno());
-            stmt.setString(4, v.getPlaca());
-            stmt.setString(5, v.getTipo());
-            stmt.setFloat(6, v.getKilometragem());
-            stmt.setString(7, v.getModelo());
-            stmt.setString(8, v.getTanque());
-            stmt.setString(9, v.getDisponibilidade());
+            PreparedStatement stmt = conecta.conn.prepareStatement("INSERT INTO veiculo (MARCA, ANO, PLACA, TIPO, KILOMETRAGEM, MODELO, TANQUE, DISPONIBILIDADE) VALUES (?,?,?,?,?,?,?,?)");
+           
+            stmt.setString(1, v.getMarca());
+            stmt.setString(2, v.getAno());
+            stmt.setString(3, v.getPlaca());
+            stmt.setString(4, v.getTipo());
+            stmt.setFloat(5, v.getKilometragem());
+            stmt.setString(6, v.getModelo());
+            stmt.setString(7, v.getTanque());
+            stmt.setString(8, v.getDisponibilidade());
 
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Veiculo inserido com sucesso");
@@ -43,7 +43,7 @@ public class VeiculoDao {
         conecta.conectar();
         try {
             PreparedStatement stmt = conecta.conn.prepareStatement("DELETE FROM veiculo WHERE id = ?");
-            stmt.setInt(1, v.getIdVeiculo());
+            stmt.setString(1, v.getIdVeiculo());
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso");
         } catch (SQLException ex) {
@@ -58,7 +58,7 @@ public class VeiculoDao {
             PreparedStatement stmt = conecta.conn.prepareStatement("UPDATE veiculo SET ID = ?, MARCA = ?, ANO = ?, PLACA = ?, TIPO = ?, "
                     + "KILOMETRAGEM = ?, MODELO = ?, TANQUE = ?, DISPONIBILIDADE = ? WHERE id = " + v.getIdVeiculo());
 
-            stmt.setString(1, String.valueOf(v.getIdVeiculo()));
+            stmt.setString(1, v.getIdVeiculo());
             stmt.setString(2, v.getMarca());
             stmt.setString(3, v.getAno());
             stmt.setString(4, v.getPlaca());
@@ -81,7 +81,7 @@ public class VeiculoDao {
             PreparedStatement stmt = conecta.conn.prepareStatement("SELECT * FROM veiculo WHERE MARCA ='" + v.getMarca() + "'");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                v.setIdVeiculo(rs.getInt("ID"));
+                v.setIdVeiculo(rs.getString("ID"));
                 v.setMarca(rs.getString("MARCA"));
                 v.setAno(rs.getString("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
@@ -93,7 +93,7 @@ public class VeiculoDao {
                 JOptionPane.showMessageDialog(null, "Busca realizada");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro na busca de dados" );
+            JOptionPane.showMessageDialog(null, "Erro na busca de dados");
 
         }
         conecta.desconectar();
@@ -108,14 +108,15 @@ public class VeiculoDao {
         List<Veiculo> veiculos = new ArrayList<>();
 
         try {
-            stmt = conecta.conn.prepareStatement("SELECT ID, MARCA, MODELO, TIPO FROM veiculo");
+            stmt = conecta.conn.prepareStatement("SELECT ID, MARCA, MODELO, ANO, DISPONIBILIDADE FROM veiculo");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Veiculo v = new Veiculo();
-                v.setIdVeiculo(rs.getInt("ID"));
+                v.setIdVeiculo(rs.getString("ID"));
                 v.setMarca(rs.getString("MARCA"));
                 v.setModelo(rs.getString("MODELO"));
-                v.setTipo("TIPO");
+                v.setAno(rs.getString("ANO"));
+                 v.setDisponibilidade(rs.getString("DISPONIBILIDADE"));
                 veiculos.add(v);
             }
         } catch (SQLException ex) {
@@ -123,6 +124,6 @@ public class VeiculoDao {
         }
         return veiculos;
     }
-    
-    
+
+ 
 }

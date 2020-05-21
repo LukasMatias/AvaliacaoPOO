@@ -10,7 +10,7 @@ package br.aluguel.poo.model.entidades;
  * @author lukas
  */
 public class Veiculo {
-    private Integer idVeiculo;
+    private String idVeiculo;
     private String marca;
     private String modelo;
     private String ano;
@@ -29,11 +29,11 @@ public class Veiculo {
         this.pesquisa = pesquisa;
     }
 
-    public Integer getIdVeiculo() {
+    public String getIdVeiculo() {
         return idVeiculo;
     }
 
-    public void setIdVeiculo(Integer idVeiculo) {
+    public void setIdVeiculo(String idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
 

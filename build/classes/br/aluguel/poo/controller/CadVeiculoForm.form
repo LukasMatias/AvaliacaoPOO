@@ -239,10 +239,22 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldCodigo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCodigoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldMarca">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPlaca">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxTipo">
               <Properties>
@@ -255,12 +267,16 @@
                     <StringItem index="4" value="PR&#xca;MIUM"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldKM">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxDisponibilidade">
               <Properties>
@@ -271,6 +287,7 @@
                     <StringItem index="2" value="INDISPON&#xcd;VEL"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -288,12 +305,16 @@
                     <StringItem index="5" value="TRES QUARTO (3/4)"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldAno">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelTipoVeicModelo">
               <Properties>
@@ -304,6 +325,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldModelo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -371,6 +395,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPesquisarActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -403,11 +430,12 @@
                       </Border>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="0">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="MARCA" type="java.lang.String"/>
                         <Column editable="false" title="MODELO" type="java.lang.String"/>
-                        <Column editable="false" title="TIPO" type="java.lang.String"/>
+                        <Column editable="false" title="ANO" type="java.lang.String"/>
+                        <Column editable="false" title="DISPONIBILIDADE" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -436,18 +464,18 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonNovo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonExcluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonEditar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonEditarVoltar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonVoltar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButtonEditarSair" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -457,13 +485,13 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonNovo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonEditar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonEditarVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
-                      <Component id="jButtonEditarSair" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -475,6 +503,7 @@
                   <Font name="Verdana" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salvar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvarActionPerformed"/>
@@ -486,12 +515,13 @@
                   <Font name="Verdana" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonNovo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="12" style="1"/>
@@ -499,7 +529,7 @@
                 <Property name="text" type="java.lang.String" value="Novo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNovoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonExcluir">
@@ -508,6 +538,7 @@
                   <Font name="Verdana" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
@@ -519,12 +550,13 @@
                   <Font name="Verdana" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonEditarSair">
+            <Component class="javax.swing.JButton" name="jButtonSair">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="12" style="1"/>
@@ -532,10 +564,10 @@
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarSairActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSairActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonEditarVoltar">
+            <Component class="javax.swing.JButton" name="jButtonVoltar">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="12" style="1"/>
@@ -543,7 +575,7 @@
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarVoltarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVoltarActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
